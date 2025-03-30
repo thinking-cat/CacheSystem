@@ -1,0 +1,72 @@
+# Compiled object files, static and dynamic libs
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.lib
+*.a
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+
+# Debugging files
+*.dSYM/
+*.pdb
+*.exp
+
+# CMake build artifacts
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CMakeUserPresets.json
+CTestTestfile.cmake
+
+# VSCode settings and workspace files
+.vscode/
+*.code-workspace
+
+# IDE and editor files
+.idea/
+*.suo
+*.user
+*.ncb
+*.sdf
+*.VC.db
+*.vs/
+*.sln
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Dependency directories
+build/
+dist/
+bin/
+obj/
+lib/
+out/
+
+# Unreal Engine specific files
+DerivedDataCache/
+Intermediate/
+Saved/
+.vscode/
+
+# SQLite database files
+*.db
+*.db-journal
+
+# Ignore golf library build artifacts (if needed)
+golf/build/
+golf/out/
+
+cmake-build-debug
+.idea
+.clang-format
