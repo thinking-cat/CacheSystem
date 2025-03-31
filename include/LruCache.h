@@ -7,9 +7,11 @@
 
 #include <memory>
 #include <unordered_map>
+#include <list>
 
 template<typename Key, typename Value>
-class LruNode{
+class LruNode
+{
 public:
     LruNode(Key key, Value value)
         : key_(key)
@@ -26,46 +28,37 @@ private:
 };
 
 template<typename Key, typename Value>
-class LruCache{
+class LruCache
+{
+	using LruNodePtr = std::shared_ptr<LruNode<Key, Value>>;
+
 public:
-    LruCache(int capacity)
-        : capacity_(capacity)
-        // Empty Node
-        , L_(std::make_unique<LruNode<Key, Value>>(Key(), Value()))
-        , R_(std::make_unique<LruNode<Key, Value>>(Key(), Value()))
-    {}
+	LruCache()
+		: capacity_(0)
+		, hashMap_()
+		, list_({dummyHead_, dummyTail_})
+		, dummyHead_(std::make_unique<LruNode<Key, Value>>())
+		, dummyTail_(std::make_unique<LruNode<Key, Value>>())
+	{}
 
-    bool get(const Key& key, Value& value){
-        if (hashmap_.find(key) != hashmap_.end()){
-            LruNode<Key, Value>* node = hashmap_[key];
-            remove(node);
-            insert(node->key_, node->value_);
-            value = node->value_;
-            return true;
-        }
-        return false;
-    }
+	LruCache(std::size_t capacity)
+	    : capacity_(0)
+	    , hashMap_()
+	    , list_({dummyHead_, dummyTail_})
+	    , dummyHead_(std::make_unique<LruNode<Key, Value>>())
+	    , dummyTail_(std::make_unique<LruNode<Key, Value>>())
+	{}
 
-    void put(Key key, Value value){
-        if (hashmap_.find(key) != hashmap_.end()){
-            LruNode<Key, Value>* node = hashmap_[key];
-            remove(node);
-            insert(node->key_, node->value_);
-        }
-        else{
-            if (hashmap_.size() == capacity_){
-                remove(L_->next);
-                insert(key, value);
-            }
-            else{
-                insert(key, value);
-            }
-        }
-    }
+	void put(Key key, Value value)
+	{
+
+	}
+
 private:
-    std::size_t capacity_;
-    std::unordered_map<Key, std::shared_ptr<LruNode<Key, Value>>> hashmap_;
-    std::unique_ptr<LruNode<Key, Value>> L_, R_;
+	std::size_t capacity_;
+	std::unordered_map<Key, LruNodePtr> hashMap_;
+	std::list<LruNode<Key, Value>> list_;
+	std::unique_ptr<LruNode<Key, Value>> dummyHead_, dummyTail_;
 };
 
 
