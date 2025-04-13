@@ -3,6 +3,8 @@ project(CacheSystem)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(CacheSystem main.cpp)
+add_executable(CacheSystem main.cpp
+        src/LruCache.tpp
+        include/LruNode.h)
 
-target_include_directories(CacheSystem include)
+target_include_directories(CacheSystem PUBLIC include)
